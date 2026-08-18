@@ -1,0 +1,9 @@
+# TanStack Start on Netlify. Netlify auto-detects the framework and deploys the
+# server as a Netlify Function; SynthOS also injects SERVER_PRESET=netlify into
+# the build environment (see _shared/netlifyBuild.ts) so the build targets
+# Netlify even if the repo also carries another host's config (e.g. wrangler).
+# After the build, netlify-api-mask.mjs prepends the /api/* -> Supabase edge
+# functions rule to dist/_redirects so the backend is served from the site's
+# own domain (the platform can't inject files into a git-built site).
+[build]
+  command = "npm run build && node netlify-api-mask.mjs"
